@@ -44,7 +44,16 @@ public abstract class Calculator extends Frame implements ActionListener {
             }
         });
 
+        calculate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int numar1; int numar2;
+                if(e.getSource()==firstNumber) {
 
+                }
+
+            }
+        });
 
         //Setam layout-ul frame-ului
 
