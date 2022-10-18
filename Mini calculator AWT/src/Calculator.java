@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
-
-public abstract class Calculator extends Frame implements ActionListener {
+abstract class Calculator extends Frame implements ActionListener {
     public static void main(String[] args) {
         Frame frame = new Frame("Frame container");
 
@@ -21,39 +20,15 @@ public abstract class Calculator extends Frame implements ActionListener {
         frame.add(firstNumber);
         frame.add(secondNumber);
 
+        /*int numar1 = Integer.parseInt(String.valueOf(firstNumber));
+        int numar2 = Integer.parseInt(String.valueOf(secondNumber));*/
+
         Choice operation = new Choice();
         operation.add("+"); operation.add("-"); operation.add("*"); operation.add("/");
         frame.add(operation);
 
         Button calculate = new Button("Calculate");
         frame.add(calculate);
-
-        firstNumber.addTextListener(new TextListener() {
-            @Override
-            public void textValueChanged(TextEvent e) {
-                TextField inputText = (TextField) e.getSource();
-                int numar1 = Integer.parseInt(String.valueOf(inputText));
-            }
-        });
-
-        secondNumber.addTextListener(new TextListener() {
-            @Override
-            public void textValueChanged(TextEvent e) {
-                TextField inputText = (TextField) e.getSource();
-                int numar2 = Integer.parseInt(String.valueOf(inputText));
-            }
-        });
-
-        calculate.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int numar1; int numar2;
-                if(e.getSource()==firstNumber) {
-
-                }
-
-            }
-        });
 
         //Setam layout-ul frame-ului
 
@@ -99,6 +74,28 @@ public abstract class Calculator extends Frame implements ActionListener {
         frame.setBackground(Color.LIGHT_GRAY);
         frame.setResizable(false);
         frame.setVisible(true);
+
+        firstNumber.addTextListener(new TextListener() {
+            @Override
+            public void textValueChanged(TextEvent e) {
+                TextField firstNumber = (TextField) e.getSource();
+                int numar1 = Integer.parseInt(String.valueOf(firstNumber));
+            }
+        });
+
+        secondNumber.addTextListener(new TextListener() {
+            @Override
+            public void textValueChanged(TextEvent e) {
+                TextField secondNumber = (TextField) e.getSource();
+                int numar2 = Integer.parseInt(String.valueOf(secondNumber));
+            }
+        });
+        calculate.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+        });
 
         frame.addWindowListener(new WindowAdapter() {
             @Override
