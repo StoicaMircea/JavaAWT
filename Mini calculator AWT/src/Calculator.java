@@ -31,7 +31,10 @@ abstract class Calculator extends Frame implements ActionListener {
         resultDisplay.addActionListener(this);
 
         //Adaugam lista cu operatii matematice
-        operation.add("+"); operation.add("-"); operation.add("*"); operation.add("/");
+        operation.add("+");
+        operation.add("-");
+        operation.add("*");
+        operation.add("/");
         frame.add(operation);
 
         //Adaugam butonul pentru calcul
@@ -91,24 +94,47 @@ abstract class Calculator extends Frame implements ActionListener {
                 System.exit(0);
             }
         });
+
+        firstNumber.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char characters = e.getKeyChar();
+                if(!(Character.isDigit(characters)) || (characters == KeyEvent.VK_BACK_SPACE) || (characters == KeyEvent.VK_DELETE)){
+                    e.consume();
+                }
+            }
+        });
+        secondNumber.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char characters = e.getKeyChar();
+                if(!(Character.isDigit(characters)) || (characters == KeyEvent.VK_BACK_SPACE) || (characters == KeyEvent.VK_DELETE)){
+                    e.consume();
+                }
+            }
+        });
+        resultDisplay.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char characters = e.getKeyChar();
+                if(!(Character.isDigit(characters)) || (characters == KeyEvent.VK_BACK_SPACE) || (characters == KeyEvent.VK_DELETE)){
+                    e.consume();
+                }
+            }
+        });
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-
-
-
-        Float firstInput = Float.parseFloat(String.valueOf(firstNumber));
-        Float secondInput = Float.parseFloat(String.valueOf(secondNumber));
-
         try {
+            Float firstInput = Float.parseFloat(String.valueOf(firstNumber));
+            Float secondInput = Float.parseFloat(String.valueOf(secondNumber));
 
-        } catch(NumberFormatException nfe) {
+        } catch(NumberFormatException a) {
 
         }
     }
     public static void main(String[] args) {
         new Calculator() {
-
         };
     }
 }
