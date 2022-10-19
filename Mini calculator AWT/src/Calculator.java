@@ -5,7 +5,7 @@ abstract class Calculator extends Frame implements ActionListener {
     Label label = new Label("First number: ", Label.CENTER);
     Label anotherLabel = new Label("Second number: ", Label.CENTER);
     Label selectOperation = new Label("Select operation: ");
-    Label result = new Label("Result is: ", Label.CENTER);
+    Label result = new Label("Show result: ", Label.CENTER);
 
     TextField firstNumber = new TextField(5);
     TextField secondNumber = new TextField(5);
@@ -65,19 +65,17 @@ abstract class Calculator extends Frame implements ActionListener {
         gbc.gridy = 1;
         frame.add(operation, gbc);
 
-        gbc.gridx = 3;
-        gbc.gridy = 1;
+        gbc.gridx = 0;
+        gbc.gridy = 2;
         frame.add(calculate, gbc);
 
-        gbc.gridx = 4;
+        gbc.gridx = 3;
         gbc.gridy = 0;
         frame.add(result, gbc);
 
-        gbc.gridx = 4;
+        gbc.gridx = 3;
         gbc.gridy = 1;
-        gbc.gridheight = 2;
         frame.add(resultDisplay, gbc);
-
 
         //Setam caracteristicile containerului frame
         frame.setSize(500, 250);
@@ -94,12 +92,21 @@ abstract class Calculator extends Frame implements ActionListener {
             }
         });
     }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Float firstInput = Float.parseFloat(String.valueOf(firstNumber));
+        Float secondInput = Float.parseFloat(String.valueOf(secondNumber));
+
+        try {
+
+        } catch(NumberFormatException nfe) {
+
+        }
+
+    }
     public static void main(String[] args) {
         new Calculator() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
         };
     }
 }
