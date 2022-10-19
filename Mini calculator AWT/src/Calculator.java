@@ -94,6 +94,9 @@ abstract class Calculator extends Frame implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+
+
+
         Float firstInput = Float.parseFloat(String.valueOf(firstNumber));
         Float secondInput = Float.parseFloat(String.valueOf(secondNumber));
 
@@ -102,7 +105,6 @@ abstract class Calculator extends Frame implements ActionListener {
         } catch(NumberFormatException nfe) {
 
         }
-
     }
     public static void main(String[] args) {
         new Calculator() {
