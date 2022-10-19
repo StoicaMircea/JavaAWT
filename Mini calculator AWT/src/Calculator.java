@@ -1,41 +1,46 @@
 import java.awt.*;
 import java.awt.event.*;
 abstract class Calculator extends Frame implements ActionListener {
-    public static void main(String[] args) {
-        Frame frame = new Frame("Frame container");
+    Frame frame = new Frame("Frame container");
+    Label label = new Label("First number: ", Label.CENTER);
+    Label anotherLabel = new Label("Second number: ", Label.CENTER);
+    Label selectOperation = new Label("Select operation: ");
+    Label result = new Label("Result is: ", Label.CENTER);
 
-        Label label = new Label("First number: ");
-        Label anotherLabel = new Label("Second number: ");
-        Label selectOperation = new Label("Select operation: ");
-        Label result = new Label("Result is: ");
+    TextField firstNumber = new TextField(5);
+    TextField secondNumber = new TextField(5);
+    TextField resultDisplay = new TextField(5);
+    Button calculate = new Button("Calculate");
+    Choice operation = new Choice();
+    GridBagLayout layout = new GridBagLayout();
+    GridBagConstraints gbc = new GridBagConstraints();
 
+    Calculator() {
+        //Adaugam etichetele pe frame
         frame.add(label);
         frame.add(anotherLabel);
         frame.add(selectOperation);
         frame.add(result);
 
-        TextField firstNumber = new TextField(5);
-        TextField secondNumber = new TextField(5);
-
+        //Adaugam campurile pentru introducerea valorilor numerice
         frame.add(firstNumber);
         frame.add(secondNumber);
+        frame.add(resultDisplay);
+        firstNumber.addActionListener(this);
+        secondNumber.addActionListener(this);
+        resultDisplay.addActionListener(this);
 
-        /*int numar1 = Integer.parseInt(String.valueOf(firstNumber));
-        int numar2 = Integer.parseInt(String.valueOf(secondNumber));*/
-
-        Choice operation = new Choice();
+        //Adaugam lista cu operatii matematice
         operation.add("+"); operation.add("-"); operation.add("*"); operation.add("/");
         frame.add(operation);
 
-        Button calculate = new Button("Calculate");
+        //Adaugam butonul pentru calcul
         frame.add(calculate);
 
         //Setam layout-ul frame-ului
-
-        GridBagLayout layout = new GridBagLayout();
         frame.setLayout(layout);
 
-        GridBagConstraints gbc = new GridBagConstraints();
+        //Organiza afisarea componentelor
         gbc.gridx = 0;
         gbc.gridy = 0;
         frame.add(label, gbc);
@@ -64,44 +69,37 @@ abstract class Calculator extends Frame implements ActionListener {
         gbc.gridy = 1;
         frame.add(calculate, gbc);
 
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.gridheight = 2;
+        gbc.gridx = 4;
+        gbc.gridy = 0;
         frame.add(result, gbc);
 
-        frame.setSize(500, 500);
+        gbc.gridx = 4;
+        gbc.gridy = 1;
+        gbc.gridheight = 2;
+        frame.add(resultDisplay, gbc);
+
+
+        //Setam caracteristicile containerului frame
+        frame.setSize(500, 250);
         frame.setTitle("Mini Calculator App");
         frame.setBackground(Color.LIGHT_GRAY);
         frame.setResizable(false);
         frame.setVisible(true);
 
-        firstNumber.addTextListener(new TextListener() {
-            @Override
-            public void textValueChanged(TextEvent e) {
-                TextField firstNumber = (TextField) e.getSource();
-                int numar1 = Integer.parseInt(String.valueOf(firstNumber));
-            }
-        });
-
-        secondNumber.addTextListener(new TextListener() {
-            @Override
-            public void textValueChanged(TextEvent e) {
-                TextField secondNumber = (TextField) e.getSource();
-                int numar2 = Integer.parseInt(String.valueOf(secondNumber));
-            }
-        });
-        calculate.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
-        });
-
+        //Adaugam functionalitatea de inchidere a ferestrei
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
             }
         });
+    }
+    public static void main(String[] args) {
+        new Calculator() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        };
     }
 }
