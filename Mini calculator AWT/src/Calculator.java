@@ -1,6 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
-abstract class Calculator extends Frame {
+abstract class Calculator extends Frame implements ActionListener {
     Frame frame = new Frame("Frame container");
     Label label = new Label("First number: ", Label.CENTER);
     Label anotherLabel = new Label("Second number: ", Label.CENTER);
@@ -9,6 +9,7 @@ abstract class Calculator extends Frame {
 
     TextField firstNumber = new TextField(5);
     TextField secondNumber = new TextField(5);
+    TextField resultDisplay = new TextField(5);
     Button calculate = new Button("Calculate");
     Choice operation = new Choice();
     GridBagLayout layout = new GridBagLayout();
@@ -24,9 +25,16 @@ abstract class Calculator extends Frame {
         //Adaugam campurile pentru introducerea valorilor numerice
         frame.add(firstNumber);
         frame.add(secondNumber);
+        frame.add(resultDisplay);
+        firstNumber.addActionListener(this);
+        secondNumber.addActionListener(this);
+        resultDisplay.addActionListener(this);
 
         //Adaugam lista cu operatii matematice
-        operation.add("+"); operation.add("-"); operation.add("*"); operation.add("/");
+        operation.add("+");
+        operation.add("-");
+        operation.add("*");
+        operation.add("/");
         frame.add(operation);
 
         //Adaugam butonul pentru calcul
@@ -68,30 +76,16 @@ abstract class Calculator extends Frame {
         gbc.gridy = 0;
         frame.add(result, gbc);
 
+        gbc.gridx = 3;
+        gbc.gridy = 1;
+        frame.add(resultDisplay, gbc);
+
         //Setam caracteristicile containerului frame
         frame.setSize(500, 250);
         frame.setTitle("Mini Calculator App");
         frame.setBackground(Color.LIGHT_GRAY);
         frame.setResizable(false);
         frame.setVisible(true);
-
-        calculate.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Button calcul = (Button) e.getSource();
-                try {
-                    Float firstInput = Float.parseFloat(String.valueOf(firstNumber).formatted("%.2f"));
-                    Float secondInput = Float.parseFloat(String.valueOf(secondNumber).formatted("%.2f"));
-
-                    String resolution = (firstInput.isNaN() || secondInput.isNaN()) ? "Invalid argument.":"Continue";
-                    System.out.println(resolution);
-
-                } catch(NumberFormatException ignore) {
-                    System.out.println("You added an invalid argument!");
-                }
-                System.out.println("Please add a numeric value.");
-            }
-        });
 
         //Adaugam functionalitatea de inchidere a ferestrei
         frame.addWindowListener(new WindowAdapter() {
@@ -100,10 +94,44 @@ abstract class Calculator extends Frame {
                 System.exit(0);
             }
         });
+
+        calculate.addActionListener(this);
     }
     public static void main(String[] args) {
-        new Calculator(){
-
+        new Calculator() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                float firstInput = 0;
+                float secondInput = 0;
+                try {
+                    firstInput = Float.parseFloat(firstNumber.getText());
+                    secondInput = Float.parseFloat(secondNumber.getText());
+                } catch(NumberFormatException exception) {
+                    resultDisplay.setText("Number not float");
+                }
+                System.out.println(operation.getSelectedItem());
+                switch (operation.getSelectedItem()) {
+                    case "+" -> {
+                        float rezplus = firstInput + secondInput;
+                        resultDisplay.setText(String.valueOf(rezplus));
+                    }
+                    case "-" -> {
+                        float rezminus = firstInput - secondInput;
+                        resultDisplay.setText(String.valueOf(rezminus));
+                    }
+                    case "*" -> {
+                        float rezprod = firstInput * secondInput;
+                        resultDisplay.setText(String.valueOf(rezprod));
+                    }
+                    case "/" -> {
+                        float rezfrac = firstInput / secondInput;
+                        resultDisplay.setText(String.valueOf(rezfrac));
+                    }
+                    default -> {
+                        System.out.println("No option");
+                    }
+                }
+            }
         };
     }
 }
