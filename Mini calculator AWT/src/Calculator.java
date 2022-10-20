@@ -1,6 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
-abstract class Calculator extends Frame implements ActionListener {
+abstract class Calculator extends Frame {
     Frame frame = new Frame("Frame container");
     Label label = new Label("First number: ", Label.CENTER);
     Label anotherLabel = new Label("Second number: ", Label.CENTER);
@@ -103,9 +103,7 @@ abstract class Calculator extends Frame implements ActionListener {
     }
     public static void main(String[] args) {
         new Calculator(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
+
         };
     }
 }
