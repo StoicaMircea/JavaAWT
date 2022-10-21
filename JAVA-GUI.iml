@@ -3,6 +3,7 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/JavaSwing/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Mini calculator AWT/src" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
